@@ -18,6 +18,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				jakarta: ['var(--font-plus-jakarta-sans)', 'sans-serif'],
+				inter: ["Inter", "sans-serif"],
+				circular : ['"Circular Std"', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

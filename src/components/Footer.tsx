@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
           {/* Brand */}
           <div className="space-y-6">
-            <Link to="/" className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+            <Link to="/" className="font-circular text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
               Saree Elegance
             </Link>
             <p className="text-muted-foreground leading-relaxed">

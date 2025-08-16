@@ -15,34 +15,35 @@ const Hero = () => {
                   <Star key={i} className="h-4 w-4 fill-gold text-gold" />
                 ))}
               </div>
-              <span className="text-muted-foreground">Trusted by 50,000+ customers</span>
+              <span className="text-muted-foreground font-circular">Trusted by 50,000+ customers</span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+            <h1 className="font-circular text-4xl lg:text-6xl font-bold lg:leading-tight">
               Exquisite
-              <span className="block bg-gradient-hero bg-clip-text text-transparent">
-                Silk Sarees
+              <span className="bg-gradient-hero bg-clip-text text-transparent">
+                {' '}Silk Sarees{' '}
               </span>
+              <br />
               for Every Occasion
             </h1>
             
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
+            <p className="font-circular text-lg text-muted-foreground leading-relaxed max-w-md">
               Discover our curated collection of handwoven silk sarees, 
               crafted by master artisans with centuries of tradition and 
               modern elegance.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" className="group">
+              <Button variant="hero" size="xl" className="font-circular group">
                 Shop Collection
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="outline" size="xl">
+              <Button variant="outline" size="xl" className="font-circular">
                 View Catalog
               </Button>
             </div>
             
-            <div className="flex items-center space-x-8 pt-8">
+            <div className="flex items-center space-x-8 pt-8 font-circular">
               <div className="text-center">
                 <div className="text-2xl font-bold text-foreground">500+</div>
                 <div className="text-sm text-muted-foreground">Unique Designs</div>
@@ -71,11 +72,11 @@ const Hero = () => {
             
             {/* Floating Badge */}
             <div className="absolute top-6 left-6 bg-background/95 backdrop-blur-md rounded-full px-4 py-2 shadow-card">
-              <span className="text-sm font-medium text-primary">New Collection</span>
+              <span className="text-sm font-medium text-primary font-circular">New Collection</span>
             </div>
             
             {/* Price Badge */}
-            <div className="absolute bottom-6 right-6 bg-background/95 backdrop-blur-md rounded-lg p-4 shadow-card">
+            <div className="font-circular absolute bottom-6 right-6 bg-background/95 backdrop-blur-md rounded-lg p-4 shadow-card">
               <div className="text-lg font-bold text-foreground">₹12,500</div>
               <div className="text-sm text-muted-foreground line-through">₹15,000</div>
             </div>
