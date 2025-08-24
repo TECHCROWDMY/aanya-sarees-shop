@@ -10,13 +10,13 @@ const FeaturedProducts = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl lg:text-5xl font-bold">
+          <h2 className="font-circular text-3xl lg:text-5xl font-bold lg:leading-tight">
             Featured 
-            <span className="block bg-gradient-hero bg-clip-text text-transparent">
-              Collection
+            <span className="bg-gradient-hero bg-clip-text text-transparent">
+              {' '}Collection{' '}
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="font-circular text-lg text-muted-foreground max-w-2xl mx-auto">
             Handpicked sarees that embody the perfect blend of traditional craftsmanship 
             and contemporary elegance.
           </p>
@@ -34,7 +34,7 @@ const FeaturedProducts = () => {
         </div>
         
         <div className="text-center">
-          <Button variant="luxury" size="xl" className="group">
+          <Button variant="luxury" size="xl" className="font-circular group">
             View All Products
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>

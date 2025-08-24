@@ -13,7 +13,7 @@ const Footer = () => {
             <Link to="/" className="font-circular text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
               Saree Elegance
             </Link>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="font-circular text-muted-foreground leading-relaxed">
               Celebrating the timeless beauty of Indian sarees with authentic craftsmanship 
               and contemporary designs for the modern woman.
             </p>
@@ -35,8 +35,8 @@ const Footer = () => {
           
           {/* Quick Links */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
-            <nav className="flex flex-col space-y-3">
+            <h3 className="font-circular text-lg font-semibold text-foreground">Quick Links</h3>
+            <nav className="font-circular flex flex-col space-y-3">
               <Link to="/collection" className="text-muted-foreground hover:text-primary transition-colors">
                 All Collections
               </Link>
@@ -57,8 +57,8 @@ const Footer = () => {
           
           {/* Customer Care */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Customer Care</h3>
-            <nav className="flex flex-col space-y-3">
+            <h3 className="font-circular text-lg font-semibold text-foreground">Customer Care</h3>
+            <nav className="font-circular flex flex-col space-y-3">
               <Link to="/size-guide" className="text-muted-foreground hover:text-primary transition-colors">
                 Size Guide
               </Link>
@@ -79,13 +79,13 @@ const Footer = () => {
           
           {/* Newsletter */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Stay Updated</h3>
-            <p className="text-muted-foreground text-sm">
+            <h3 className="font-circular text-lg font-semibold text-foreground">Stay Updated</h3>
+            <p className="font-circular text-muted-foreground text-sm">
               Subscribe to get updates on new collections and exclusive offers.
             </p>
             <div className="flex flex-col space-y-3">
-              <Input placeholder="Enter your email" className="bg-background" />
-              <Button variant="luxury" className="w-full">
+              <Input placeholder="Enter your email" className="font-circular bg-background" />
+              <Button variant="luxury" className="w-full font-circular ">
                 Subscribe
               </Button>
             </div>
@@ -93,25 +93,25 @@ const Footer = () => {
             <div className="space-y-3 pt-4">
               <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+91 98765 43210</span>
+                <span className='font-circular'>+91 98765 43210</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>hello@sareeelegance.com</span>
+                <span  className='font-circular'>hello@sareeelegance.com</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span className='font-circular'>Mumbai, Maharashtra, India</span>
               </div>
             </div>
           </div>
         </div>
         
         <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-muted-foreground text-sm">
+          <p className="font-circular text-muted-foreground text-sm">
             © 2024 Saree Elegance. All rights reserved.
           </p>
-          <div className="flex space-x-6 text-sm text-muted-foreground">
+          <div className="font-circular flex space-x-6 text-sm text-muted-foreground">
             <Link to="/privacy" className="hover:text-primary transition-colors">
               Privacy Policy
             </Link>

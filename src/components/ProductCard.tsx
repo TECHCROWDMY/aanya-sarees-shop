@@ -30,10 +30,10 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
         {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-col gap-2">
           {product.featured && (
-            <Badge className="bg-gold text-gold-foreground">Featured</Badge>
+            <Badge className="font-circular bg-gold text-gold-foreground">Featured</Badge>
           )}
           {discount > 0 && (
-            <Badge className="bg-crimson text-crimson-foreground">{discount}% OFF</Badge>
+            <Badge className="font-circular bg-crimson text-crimson-foreground">{discount}% OFF</Badge>
           )}
         </div>
         
@@ -63,18 +63,18 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
       {/* Content */}
       <div className="p-6 space-y-4">
         <div>
-          <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
+          <h3 className="font-circular font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
             {product.name}
           </h3>
-          <p className="text-sm text-muted-foreground">{product.category}</p>
+          <p className="font-circular text-sm text-muted-foreground">{product.category}</p>
         </div>
         
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="font-circular text-sm text-muted-foreground line-clamp-2">
           {product.description}
         </p>
         
         <div className="flex items-center space-x-2">
-          <Badge variant="outline" className="text-xs">{product.material}</Badge>
+          <Badge variant="outline" className="font-circular text-xs">{product.material}</Badge>
           {product.colors.map((color, index) => (
             <div 
               key={index}
@@ -94,11 +94,11 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
         
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-foreground">
+            <span className="font-circular text-xl font-bold text-foreground">
               ₹{product.price.toLocaleString()}
             </span>
             {product.originalPrice && (
-              <span className="text-sm text-muted-foreground line-through">
+              <span className="font-circular text-sm text-muted-foreground line-through">
                 ₹{product.originalPrice.toLocaleString()}
               </span>
             )}

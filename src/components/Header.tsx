@@ -55,7 +55,7 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between text-sm">
-            <div className="hidden md:flex items-center space-x-6 font-circular">
+            <div className="hidden lg:flex items-center space-x-6 font-circular">
               <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">
                 About Us
               </Link>
@@ -71,7 +71,7 @@ const Header = () => {
             </div>
 
             <div className="flex items-center space-x-4 font-circular">
-              <div className="hidden md:flex items-center text-muted-foreground">
+              <div className="hidden lg:flex items-center text-muted-foreground">
                 <FaPhone className="h-4 w-4 mr-1" />
                 <span>Need Help? +91 98765 43210</span>
               </div>
@@ -149,7 +149,7 @@ const Header = () => {
       {/* Navigation Menu */}
       <div className="bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
-          <nav className="hidden md:flex items-center">
+          <nav className="hidden lg:flex items-center">
             <Button variant="ghost" className="font-circular text-primary-foreground hover:bg-primary-foreground/10 rounded-none py-6 px-6">
               <FaBars className="h-4 w-4 mr-2" />
               All Categories

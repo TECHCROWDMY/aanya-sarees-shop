@@ -18,7 +18,7 @@ const Hero = () => {
               <span className="text-muted-foreground font-circular">Trusted by 50,000+ customers</span>
             </div>
             
-            <h1 className="font-circular text-4xl lg:text-6xl font-bold lg:leading-tight">
+            <h1 className="font-circular text-4xl lg:text-[55px] font-bold lg:leading-tight">
               Exquisite
               <span className="bg-gradient-hero bg-clip-text text-transparent">
                 {' '}Silk Sarees{' '}
