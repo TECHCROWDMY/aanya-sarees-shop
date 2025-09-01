@@ -109,7 +109,7 @@ const Footer = () => {
         
         <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="font-circular text-muted-foreground text-sm">
-            © 2024 Saree Elegance. All rights reserved.
+            © {new Date().getFullYear()} Saree Elegance. All rights reserved.
           </p>
           <div className="font-circular flex space-x-6 text-sm text-muted-foreground">
             <Link to="/privacy" className="hover:text-primary transition-colors">

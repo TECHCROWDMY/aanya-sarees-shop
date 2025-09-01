@@ -15,13 +15,13 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
     : 0;
 
   return (
-    <div className="group relative bg-gradient-card rounded-xl overflow-hidden shadow-card hover:shadow-luxury transition-all duration-500 hover:scale-105">
+    <div className="group relative shadow-none transition-all duration-500 hover:cursor-pointer">
       {/* Image Container */}
-      <div className="relative aspect-[3/4] overflow-hidden">
+      <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
         <img 
           src={product.images[0]} 
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover transition-transform duration-700"
         />
         
         {/* Overlay */}
@@ -48,7 +48,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
         </Button>
         
         {/* Quick Actions */}
-        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Button 
             variant="hero" 
             className="w-full" 
@@ -57,22 +57,18 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
             <ShoppingBag className="h-4 w-4 mr-2" />
             Add to Cart
           </Button>
-        </div>
+        </div> */}
       </div>
       
       {/* Content */}
-      <div className="p-6 space-y-4">
+      <div className="flex flex-col pt-3 gap-2 pace-y-4">
         <div>
-          <h3 className="font-circular font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
+          <h3 className="text-[#4f4f4f] font-circular font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
             {product.name}
           </h3>
-          <p className="font-circular text-sm text-muted-foreground">{product.category}</p>
+          {/* <p className="font-circular text-sm text-muted-foreground">{product.category}</p> */}
         </div>
-        
-        <p className="font-circular text-sm text-muted-foreground line-clamp-2">
-          {product.description}
-        </p>
-        
+                
         <div className="flex items-center space-x-2">
           <Badge variant="outline" className="font-circular text-xs">{product.material}</Badge>
           {product.colors.map((color, index) => (
@@ -94,7 +90,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
         
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <span className="font-circular text-xl font-bold text-foreground">
+            <span className="text-[#4f4f4f] font-circular text-xl font-bold text-foreground">
               ₹{product.price.toLocaleString()}
             </span>
             {product.originalPrice && (

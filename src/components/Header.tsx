@@ -9,7 +9,6 @@ import { HeartIcon, UserIcon, ShoppingBagIcon } from '../icons';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const topBarRef = useRef(null);
   const ticking = useRef(false);
 
@@ -17,16 +16,8 @@ const Header = () => {
     if (!ticking.current) {
       window.requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
-        const scrollTriggerHeight = topBarRef.current ? topBarRef.current.offsetHeight : 0;
-
-        // Add a small threshold (5px) to prevent flickering
-        if (currentScrollY > lastScrollY + 5 && currentScrollY > scrollTriggerHeight) {
-          setIsTopBarVisible(false);
-        } else if (currentScrollY < lastScrollY - 5 || currentScrollY <= scrollTriggerHeight / 2) {
-          setIsTopBarVisible(true);
-        }
-
-        setLastScrollY(currentScrollY);
+        // Show the top bar only when the scroll position is at the very top (0)
+        setIsTopBarVisible(currentScrollY === 0);
         ticking.current = false;
       });
       ticking.current = true;
@@ -34,11 +25,13 @@ const Header = () => {
   };
 
   useEffect(() => {
+    // Add event listener on component mount
     window.addEventListener('scroll', handleScroll);
+    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollY]);
+  }, []); // Empty dependency array ensures this effect runs only once
 
   return (
     <header className="sticky top-0 z-50 bg-background shadow-sm">
@@ -47,10 +40,7 @@ const Header = () => {
         ref={topBarRef}
         className="border-b bg-muted/30 transition-all duration-300 ease-in-out overflow-hidden"
         style={{
-          maxHeight:
-            isTopBarVisible && topBarRef.current
-              ? `${topBarRef.current.scrollHeight}px`
-              : '0px',
+          maxHeight: isTopBarVisible ? `${topBarRef.current?.scrollHeight}px` : '0px',
         }}
       >
         <div className="container mx-auto px-4 py-2">

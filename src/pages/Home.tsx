@@ -4,7 +4,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 // import Categories from '@/components/Categories';
 import Footer from '@/components/Footer';
 
-const Index = () => {
+const Home = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -18,4 +18,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;
