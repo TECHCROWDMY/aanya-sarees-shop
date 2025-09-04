@@ -2,6 +2,7 @@ import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Product } from '@/types/product';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   product: Product;
@@ -15,7 +16,10 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
     : 0;
 
   return (
-    <div className="group relative shadow-none transition-all duration-500 hover:cursor-pointer">
+    <Link 
+      to={`/product/${product.slug}`}
+      className="group relative shadow-none transition-all duration-500 hover:cursor-pointer"
+    >
       {/* Image Container */}
       <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
         <img 
@@ -112,7 +116,7 @@ const ProductCard = ({ product, onAddToCart, onToggleWishlist }: ProductCardProp
           </Badge>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { HeartIcon, UserIcon, ShoppingBagIcon } from '../icons';
 
-const Header = () => {
+const Header = ({isHome=false}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
   const topBarRef = useRef(null);
@@ -137,40 +137,44 @@ const Header = () => {
       </div>
 
       {/* Navigation Menu */}
-      <div className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <nav className="hidden lg:flex items-center">
-            <Button variant="ghost" className="font-circular text-primary-foreground hover:bg-primary-foreground/10 rounded-none py-6 px-6">
-              <FaBars className="h-4 w-4 mr-2" />
-              All Categories
-              <ChevronDown className="h-4 w-4 ml-2" />
-            </Button>
-            <div className="flex items-center space-x-8 ml-8 font-circular">
-              <Link to="/women" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Women's Sarees
-              </Link>
-              <Link to="/designer" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Designer Collection
-              </Link>
-              <Link to="/silk" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Silk Sarees
-              </Link>
-              <Link to="/occasion" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Occasion Wear
-              </Link>
-              <Link to="/accessories" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Accessories
-              </Link>
-              <Link to="/blog" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Style Guide
-              </Link>
-              <Link to="/contact" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
-                Contact Us
-              </Link>
-            </div>
-          </nav>
+      {
+        isHome && 
+        <div className="bg-primary text-primary-foreground">
+          <div className="container mx-auto px-4">
+            <nav className="hidden lg:flex items-center">
+              <Button variant="ghost" className="font-circular text-primary-foreground hover:bg-primary-foreground/10 rounded-none py-6 px-6">
+                <FaBars className="h-4 w-4 mr-2" />
+                All Categories
+                <ChevronDown className="h-4 w-4 ml-2" />
+              </Button>
+              <div className="flex items-center space-x-8 ml-8 font-circular">
+                <Link to="/women" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Women's Sarees
+                </Link>
+                <Link to="/designer" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Designer Collection
+                </Link>
+                <Link to="/silk" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Silk Sarees
+                </Link>
+                <Link to="/occasion" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Occasion Wear
+                </Link>
+                <Link to="/accessories" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Accessories
+                </Link>
+                <Link to="/blog" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Style Guide
+                </Link>
+                <Link to="/contact" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors py-6">
+                  Contact Us
+                </Link>
+              </div>
+            </nav>
+          </div>
         </div>
-      </div>
+      }
+      
 
       {/* Mobile Menu */}
       {isMenuOpen && (
