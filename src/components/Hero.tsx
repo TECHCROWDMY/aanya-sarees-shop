@@ -1,8 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Star } from 'lucide-react';
 import heroSaree from '@/assets/hero-saree.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative overflow-hidden bg-gradient-luxury">
       <div className="container mx-auto px-4 py-20 lg:py-32">
@@ -33,14 +36,20 @@ const Hero = () => {
               modern elegance.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" className="font-circular group">
+            <div className="font-circular flex flex-col sm:flex-row gap-4">
+              <button 
+                onClick={() => navigate('/products')}
+                className="font-circular px-8 py-3 rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-md group flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+              >
                 Shop Collection
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="outline" size="xl" className="font-circular">
+              </button>
+              <button
+                onClick={() => navigate('/products')}
+                className="font-circular px-8 py-3 rounded-full border border-gray-300 text-gray-800 bg-white hover:bg-gray-100 transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+              >
                 View Catalog
-              </Button>
+              </button>
             </div>
             
             <div className="flex items-center space-x-8 pt-8 font-circular">

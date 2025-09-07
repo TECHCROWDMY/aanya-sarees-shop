@@ -1,22 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react'; 
 import { FaSearch, FaBars, FaPhone, FaGlobe } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { HeartIcon, UserIcon, ShoppingBagIcon } from '../icons';
+import { useCart } from '@/context/cartContext';
 
-const Header = ({isHome=false}) => {
+const Header = ({ isHome = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
   const topBarRef = useRef(null);
   const ticking = useRef(false);
 
+  const { cartItems, openCart } = useCart();
+
   const handleScroll = () => {
     if (!ticking.current) {
       window.requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
-        // Show the top bar only when the scroll position is at the very top (0)
         setIsTopBarVisible(currentScrollY === 0);
         ticking.current = false;
       });
@@ -25,13 +27,11 @@ const Header = ({isHome=false}) => {
   };
 
   useEffect(() => {
-    // Add event listener on component mount
     window.addEventListener('scroll', handleScroll);
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-background shadow-sm">
@@ -117,11 +117,18 @@ const Header = ({isHome=false}) => {
               <Button variant="ghost" size="icon" className="hidden md:flex">
                 <UserIcon className="h-6 w-6 fill-current" />
               </Button>
-              <Button variant="ghost" size="icon" className="relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative"
+                onClick={openCart}
+              >
                 <ShoppingBagIcon className="h-6 w-6 fill-current" />
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 flex items-center justify-center text-[10px]">
-                  2
-                </span>
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 flex items-center justify-center text-[10px]">
+                    {cartItems.length}
+                  </span>
+                )}
               </Button>
               <Button
                 variant="ghost"
@@ -137,8 +144,7 @@ const Header = ({isHome=false}) => {
       </div>
 
       {/* Navigation Menu */}
-      {
-        isHome && 
+      {isHome && (
         <div className="bg-primary text-primary-foreground">
           <div className="container mx-auto px-4">
             <nav className="hidden lg:flex items-center">
@@ -173,8 +179,7 @@ const Header = ({isHome=false}) => {
             </nav>
           </div>
         </div>
-      }
-      
+      )}
 
       {/* Mobile Menu */}
       {isMenuOpen && (

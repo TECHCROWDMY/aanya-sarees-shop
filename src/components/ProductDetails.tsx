@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '@/context/cartContext';
 
-const ProductDetails = ({product}) => { 
+const ProductDetails = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(null);
+  const navigate = useNavigate();
+  const { addToCart, openCart } = useCart();
 
   // If the product is not found, display a message.
   if (!product) {
@@ -14,6 +18,19 @@ const ProductDetails = ({product}) => {
       </div>
     );
   }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert('Please select a size before adding to cart.');
+      return;
+    }
+    addToCart({ ...product, size: selectedSize });
+    openCart();
+  };
+
+  const handleBuyNow = () => {
+    navigate('/checkout', { state: { product, selectedSize } });
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -63,13 +80,21 @@ const ProductDetails = ({product}) => {
             </div>
           </div>
           
-          {/* Add to Cart Button */}
-          <button
-            onClick={() => console.log(`Added ${product.name} (size: ${selectedSize}) to cart`)}
-            className="w-full lg:w-auto px-8 py-4 text-lg bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-200"
-          >
-            Add to Cart
-          </button>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={handleAddToCart}
+              className="w-full sm:w-auto px-8 py-4 text-lg bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-200"
+            >
+              Add to Cart
+            </button>
+            <button
+              onClick={handleBuyNow}
+              className="w-full sm:w-auto px-8 py-4 text-lg bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors duration-200"
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       </div>
     </div>

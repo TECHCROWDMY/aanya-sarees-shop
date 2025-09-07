@@ -2,9 +2,11 @@ import { products } from '@/data/products';
 import ProductCard from './ProductCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const FeaturedProducts = () => {
   const featuredProducts = products.filter(product => product.featured);
+  const navigate = useNavigate();
 
   return (
     <section className="py-20 bg-background">
@@ -34,10 +36,15 @@ const FeaturedProducts = () => {
         </div>
         
         <div className="text-center">
-          <Button variant="luxury" size="xl" className="font-circular group">
+          <Button
+            variant="luxury"
+            size="xl"
+            className="font-circular group"
+            onClick={() => navigate('/products')}
+          >
             View All Products
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+            </Button>
         </div>
       </div>
     </section>
