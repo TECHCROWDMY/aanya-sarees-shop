@@ -1,9 +1,4 @@
 import { Product } from '@/types/product';
-import heroSaree from '@/assets/hero-saree.jpg';
-import saree1 from '@/assets/saree-1.jpg';
-import saree2 from '@/assets/saree-2.jpg';
-import saree3 from '@/assets/saree-3.jpg';
-import saree4 from '@/assets/saree-4.jpg';
 
 export const products: Product[] = [
   {
@@ -13,7 +8,7 @@ export const products: Product[] = [
     price: 12500,
     originalPrice: 15000,
     description: 'Exquisite royal purple silk saree with intricate gold embroidery and traditional paisley patterns. Perfect for weddings and special occasions.',
-    images: [heroSaree],
+    images: ['/assets/hero-saree.jpg'],
     category: 'Silk Sarees',
     material: 'Pure Silk',
     colors: ['Purple', 'Gold'],
@@ -28,7 +23,7 @@ export const products: Product[] = [
     price: 8500,
     originalPrice: 10000,
     description: 'Beautiful emerald green silk saree with gold border and delicate thread work. A timeless piece for any festive occasion.',
-    images: [saree1],
+    images: ['/assets/saree-1.jpg'],
     category: 'Silk Sarees',
     material: 'Pure Silk',
     colors: ['Green', 'Gold'],
@@ -42,7 +37,7 @@ export const products: Product[] = [
     slug: 'crimson-royalty',
     price: 15000,
     description: 'Stunning crimson red silk saree with heavy gold zari work and traditional motifs. A statement piece for grand celebrations.',
-    images: [saree2],
+    images: ['/assets/saree-2.jpg'],
     category: 'Designer Sarees',
     material: 'Pure Silk with Zari',
     colors: ['Red', 'Gold'],
@@ -57,7 +52,7 @@ export const products: Product[] = [
     price: 6500,
     originalPrice: 8000,
     description: 'Modern navy blue silk saree with silver embellishments and contemporary design. Perfect blend of tradition and modernity.',
-    images: [saree3],
+    images: ['/assets/saree-3.jpg'],
     category: 'Contemporary Sarees',
     material: 'Silk Blend',
     colors: ['Navy Blue', 'Silver'],
@@ -70,7 +65,7 @@ export const products: Product[] = [
     slug: 'golden-peacock-heritage',
     price: 18000,
     description: 'Luxurious golden yellow silk saree with intricate peacock motifs and heavy border work. A heritage piece for the discerning connoisseur.',
-    images: [saree4],
+    images: ['/assets/saree-4.jpg'],
     category: 'Heritage Collection',
     material: 'Pure Silk with Gold Thread',
     colors: ['Golden Yellow', 'Gold'],

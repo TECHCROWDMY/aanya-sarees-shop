@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button';
 import { ArrowRight, Star } from 'lucide-react';
-import heroSaree from '@/assets/hero-saree.jpg';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
@@ -72,7 +70,7 @@ const Hero = () => {
           <div className="relative animate-scale-in">
             <div className="relative rounded-2xl overflow-hidden shadow-luxury">
               <img 
-                src={heroSaree} 
+                src='/assets/hero-saree.jpg'
                 alt="Royal Purple Silk Saree" 
                 className="w-full h-[600px] object-cover"
               />
