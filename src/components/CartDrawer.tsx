@@ -16,19 +16,19 @@ const CartDrawer = () => {
     };
   }, [isCartOpen]);
 
-  if (!isCartOpen) return null; // Render nothing if closed
-
   return (
     <>
     {/* Backdrop */}
     <div
-      className="fixed inset-0 bg-black/50 z-[100]" // higher than header
+      className={`fixed inset-0 bg-black/50 z-[100] transition-opacity duration-300 ease-in-out ${
+        isCartOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
       onClick={closeCart}
     />
 
     {/* Drawer */}
     <div
-      className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-[110] ${
+      className={`fixed top-0 right-0 h-full w-80 bg-white shadow-luxury transform transition-all duration-300 ease-in-out z-[110] ${
         isCartOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
