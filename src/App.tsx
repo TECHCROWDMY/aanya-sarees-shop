@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import CheckoutPage from "./pages/Checkout";
 import CartDrawer from "./components/CartDrawer";
+import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./context/cartContext";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <CartProvider>
             <Routes>
               <Route path="/" element={<Home />} />
