@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/cartContext';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ProductDetails = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const navigate = useNavigate();
   const { addToCart, openCart } = useCart();
 
@@ -32,19 +34,80 @@ const ProductDetails = ({ product }) => {
     navigate('/checkout', { state: { product, selectedSize } });
   };
 
+  const handlePrevImage = () => {
+    setSelectedImageIndex(prev => 
+      prev === 0 ? product.images.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex(prev => 
+      prev === product.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col lg:flex-row gap-12 items-start lg:items-center">
         
-        {/* --- Product Image (Left) --- */}
-        <div className="lg:w-1/2 flex justify-center">
-          <div className="relative w-full max-w-md lg:max-w-none aspect-square">
+        {/* --- Product Image Gallery (Left) --- */}
+        <div className="lg:w-1/2">
+          {/* Main Image */}
+          <div className="relative w-full aspect-square mb-4">
             <img
-              src={product.images[0]}
-              alt={product.name}
-              className="absolute inset-0 w-full h-full rounded-xl shadow-lg object-cover"
+              src={product.images[selectedImageIndex]}
+              alt={`${product.name} - Image ${selectedImageIndex + 1}`}
+              className="w-full h-full rounded-xl shadow-luxury object-cover transition-all duration-300"
             />
+            
+            {/* Navigation Arrows */}
+            {product.images.length > 1 && (
+              <>
+                <button
+                  onClick={handlePrevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 hover:scale-110"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-800" />
+                </button>
+                <button
+                  onClick={handleNextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 hover:scale-110"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-800" />
+                </button>
+              </>
+            )}
+            
+            {/* Image Counter */}
+            {product.images.length > 1 && (
+              <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
+                {selectedImageIndex + 1} / {product.images.length}
+              </div>
+            )}
           </div>
+          
+          {/* Thumbnail Gallery */}
+          {product.images.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {product.images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImageIndex(index)}
+                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                    selectedImageIndex === index
+                      ? 'border-primary shadow-md ring-2 ring-primary/20'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`${product.name} thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* --- Product Details (Right) --- */}
