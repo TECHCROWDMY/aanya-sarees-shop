@@ -38,24 +38,25 @@ const AllProducts = () => {
 
         {/* --- Filter Sidebar (Left) --- */}
         <div className="lg:w-1/5 p-4">
-          <h2 className="text-xl font-bold mb-4">Filters</h2>
+          <h2 className="text-xl font-bold mb-4 font-circular">Filters</h2>
 
           {/* Search Input */}
           <div className="mb-4">
-            <h3 className="font-semibold mb-2">Search Product</h3>
+            <h3 className="font-semibold mb-2 font-circular">Search Product</h3>
             <Input
               type="text"
               placeholder="Search by name..."
               value={filters.search}
               onChange={(e) => handleFilterChange('search', e.target.value)}
+              className="font-circular"
             />
           </div>
 
           {/* Category Filter */}
           <div className="mb-4">
-            <h3 className="font-semibold mb-2">Category</h3>
+            <h3 className="font-semibold mb-2 font-circular">Category</h3>
             <select
-              className="w-full p-2 border rounded-md bg-background"
+              className="w-full p-2 border rounded-md bg-background font-circular"
               value={filters.category}
               onChange={(e) => handleFilterChange('category', e.target.value)}
             >
@@ -68,9 +69,9 @@ const AllProducts = () => {
 
           {/* Price Range Filter */}
           <div className="mb-4">
-            <h3 className="font-semibold mb-2">Price Range</h3>
+            <h3 className="font-semibold mb-2 font-circular">Price Range</h3>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm">${filters.minPrice}</span>
+              <span className="text-sm font-circular">${(filters.minPrice / 100).toFixed(0)}</span>
               <Slider
                 className="w-full"
                 value={[filters.minPrice, filters.maxPrice]}
@@ -79,18 +80,18 @@ const AllProducts = () => {
                   handleFilterChange('maxPrice', max);
                 }}
                 min={0}
-                max={maxProductPrice} // <-- CORRECTED: Pass the new max price to the slider
-                step={10}
+                max={maxProductPrice}
+                step={100}
               />
-              <span className="text-sm">${filters.maxPrice}</span>
+              <span className="text-sm font-circular">${(filters.maxPrice / 100).toFixed(0)}</span>
             </div>
           </div>
 
           {/* Size Filter */}
           <div className="mb-4">
-            <h3 className="font-semibold mb-2">Size</h3>
+            <h3 className="font-semibold mb-2 font-circular">Size</h3>
             <select
-              className="w-full p-2 border rounded-md bg-background"
+              className="w-full p-2 border rounded-md bg-background font-circular"
               value={filters.size}
               onChange={(e) => handleFilterChange('size', e.target.value)}
             >
@@ -116,7 +117,7 @@ const AllProducts = () => {
               ))
             ) : (
               <div className="col-span-full text-center py-10 text-lg text-muted-foreground">
-                <p>No products match your criteria. Please try different filters.</p>
+                <p className="font-circular">No products match your criteria. Please try different filters.</p>
               </div>
             )}
           </div>

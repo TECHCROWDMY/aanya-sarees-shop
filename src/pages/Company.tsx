@@ -10,17 +10,103 @@ import { Slider } from '@/components/ui/slider';
 const CompanyPage = () => {
   const { companySlug } = useParams();
   
-  // Decode the company name from URL
-  const companyName = companySlug?.replace(/-/g, ' ') || '';
+  // Helper function to create URL slug from company name
+  const createSlug = (name) => name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
   
-  // Get company products
+  // Find products by matching company slug
   const companyProducts = products.filter(product => 
-    product.company.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim() === companyName.toLowerCase()
+    createSlug(product.company) === companySlug
   );
+  
+  // If no products found, create dummy company data
+  let actualCompanyName = '';
+  let dummyProducts = [];
+  
+  if (companyProducts.length === 0) {
+    // Create dummy company data
+    actualCompanyName = companySlug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Unknown Company';
+    dummyProducts = [
+      {
+        id: 'dummy-1',
+        name: 'Classic Elegance Saree',
+        slug: 'classic-elegance-saree',
+        price: 9500,
+        originalPrice: 12000,
+        description: 'Beautiful traditional saree with exquisite craftsmanship and timeless design.',
+        images: ['/assets/saree-1.jpg', '/assets/saree-2.jpg', '/assets/saree-3.jpg'],
+        category: 'Traditional Sarees',
+        material: 'Pure Silk',
+        colors: ['Red', 'Gold', 'Maroon'],
+        sizes: ['Free Size'],
+        inStock: true,
+        company: actualCompanyName,
+        reviews: [
+          {
+            id: 'dummy-r1',
+            customerName: 'Sarah Johnson',
+            rating: 5,
+            comment: 'Absolutely beautiful saree! The quality exceeded my expectations.',
+            date: '2024-01-20'
+          }
+        ]
+      },
+      {
+        id: 'dummy-2',
+        name: 'Royal Heritage Collection',
+        slug: 'royal-heritage-collection',
+        price: 15500,
+        description: 'Premium heritage saree with intricate embroidery and traditional patterns.',
+        images: ['/assets/saree-2.jpg', '/assets/saree-4.jpg', '/assets/hero-saree.jpg'],
+        category: 'Heritage Collection',
+        material: 'Pure Silk with Gold Thread',
+        colors: ['Purple', 'Gold', 'Royal Blue'],
+        sizes: ['Free Size'],
+        inStock: true,
+        company: actualCompanyName,
+        reviews: [
+          {
+            id: 'dummy-r2',
+            customerName: 'Maya Patel',
+            rating: 4,
+            comment: 'Stunning design and great quality. Perfect for special occasions.',
+            date: '2024-01-15'
+          }
+        ]
+      },
+      {
+        id: 'dummy-3',
+        name: 'Contemporary Fusion Saree',
+        slug: 'contemporary-fusion-saree',
+        price: 7500,
+        originalPrice: 9000,
+        description: 'Modern fusion saree combining traditional elements with contemporary design.',
+        images: ['/assets/saree-3.jpg', '/assets/saree-1.jpg', '/assets/saree-4.jpg'],
+        category: 'Fusion Collection',
+        material: 'Silk Blend',
+        colors: ['Teal', 'Silver', 'Navy Blue'],
+        sizes: ['Free Size'],
+        inStock: true,
+        company: actualCompanyName,
+        reviews: [
+          {
+            id: 'dummy-r3',
+            customerName: 'Priya Singh',
+            rating: 5,
+            comment: 'Love this modern take on traditional sarees. Very comfortable and stylish.',
+            date: '2024-01-25'
+          }
+        ]
+      }
+    ];
+  }
 
-  const maxProductPrice = Math.max(...companyProducts.map(p => p.price));
-  const categories = [...new Set(companyProducts.map(product => product.category))];
-  const sizes = [...new Set(companyProducts.map(product => product.sizes).flat())];
+  // Use actual products or dummy data
+  const displayProducts = companyProducts.length > 0 ? companyProducts : dummyProducts;
+  const finalCompanyName = companyProducts.length > 0 ? companyProducts[0].company : actualCompanyName;
+  
+  const maxProductPrice = Math.max(...displayProducts.map(p => p.price));
+  const categories = [...new Set(displayProducts.map(product => product.category))];
+  const sizes = [...new Set(displayProducts.map(product => product.sizes).flat())];
 
   const [filters, setFilters] = useState({
     category: '',
@@ -34,7 +120,7 @@ const CompanyPage = () => {
     setFilters(prevFilters => ({ ...prevFilters, [key]: value }));
   };
 
-  const filteredProducts = companyProducts.filter(product => {
+  const filteredProducts = displayProducts.filter(product => {
     const matchesCategory = filters.category === '' || product.category === filters.category;
     const matchesPrice = product.price >= filters.minPrice && product.price <= filters.maxPrice;
     const matchesSize = filters.size === '' || product.sizes.includes(filters.size);
@@ -43,35 +129,15 @@ const CompanyPage = () => {
     return matchesCategory && matchesPrice && matchesSize && matchesSearch;
   });
 
-  // Get the actual company name from the first product
-  const actualCompanyName = companyProducts[0]?.company || companyName;
-
-  if (companyProducts.length === 0) {
-    return (
-      <>
-        <Header />
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold mb-4 font-circular">Company Not Found</h1>
-            <p className="text-gray-600 dark:text-gray-400 font-circular">
-              No products found for this company.
-            </p>
-          </div>
-        </div>
-        <Footer />
-      </>
-    );
-  }
-
   return (
     <>
       <Header />
       <div className="container mx-auto px-4 py-8">
         {/* Company Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4 font-circular">{actualCompanyName}</h1>
+          <h1 className="text-4xl font-bold mb-4 font-circular">{finalCompanyName}</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 font-circular">
-            Discover our collection of {companyProducts.length} beautiful sarees
+            Discover our collection of {displayProducts.length} beautiful sarees
           </p>
         </div>
 
