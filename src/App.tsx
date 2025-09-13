@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import CheckoutPage from "./pages/Checkout";
+import CompanyPage from "./pages/Company";
 import CartDrawer from "./components/CartDrawer";
 import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./context/cartContext";
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="/products" element={<Products />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/product/:slug" element={<ProductDetails />} />
+              <Route path="/company/:companySlug" element={<CompanyPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
 

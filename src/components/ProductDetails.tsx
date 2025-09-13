@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '@/context/cartContext';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
@@ -121,7 +121,13 @@ const ProductDetails = ({ product }) => {
           
           {/* Company Name */}
           <p className="text-lg font-circular text-gray-600 dark:text-gray-400">
-            by {product.company}
+            by{' '}
+            <Link 
+              to={`/company/${product.company.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')}`}
+              className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline transition-colors duration-200"
+            >
+              {product.company}
+            </Link>
           </p>
           
           <p className="text-2xl font-semibold font-circular text-gray-800 dark:text-gray-200">
@@ -134,23 +140,46 @@ const ProductDetails = ({ product }) => {
           {/* Colors Section */}
           <div>
             <h3 className="font-semibold mb-2 font-circular">Available Colors</h3>
-            <div className="flex gap-2">
-              {product.colors.map(color => (
-                <button
-                  key={color}
-                  onClick={() => setSelectedColor(color)}
-                  className={`
-                    px-4 py-2 rounded-full border-2 font-circular text-sm
-                    ${selectedColor === color
-                      ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                      : 'bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
-                    }
-                    transition-colors duration-200
-                  `}
-                >
-                  {color}
-                </button>
-              ))}
+            <div className="flex gap-3">
+              {product.colors.map(color => {
+                const getColorClass = (colorName) => {
+                  const colorMap = {
+                    'Purple': 'bg-purple-600',
+                    'Gold': 'bg-yellow-400',
+                    'Maroon': 'bg-red-800',
+                    'Green': 'bg-green-600',
+                    'Teal': 'bg-teal-600',
+                    'Red': 'bg-red-600',
+                    'Burgundy': 'bg-red-900',
+                    'Navy Blue': 'bg-blue-900',
+                    'Silver': 'bg-gray-400',
+                    'Royal Blue': 'bg-blue-600',
+                    'Golden Yellow': 'bg-yellow-500',
+                    'Amber': 'bg-amber-500'
+                  };
+                  return colorMap[colorName] || 'bg-gray-400';
+                };
+                
+                return (
+                  <button
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    className={`
+                      relative flex items-center gap-2 px-4 py-2 rounded-full border-2 font-circular text-sm
+                      ${selectedColor === color
+                        ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+                        : 'bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
+                      }
+                      transition-colors duration-200
+                    `}
+                  >
+                    <div 
+                      className={`w-4 h-4 rounded-full border border-gray-300 ${getColorClass(color)}`}
+                    />
+                    {color}
+                  </button>
+                );
+              })}
             </div>
           </div>
           
