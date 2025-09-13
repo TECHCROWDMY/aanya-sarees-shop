@@ -12,6 +12,16 @@ export interface Product {
   sizes: string[];
   inStock: boolean;
   featured?: boolean;
+  company: string;
+  reviews: Review[];
+}
+
+export interface Review {
+  id: string;
+  customerName: string;
+  rating: number;
+  comment: string;
+  date: string;
 }
 
 export interface CartItem {

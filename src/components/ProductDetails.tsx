@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/cartContext';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 const ProductDetails = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const navigate = useNavigate();
   const { addToCart, openCart } = useCart();
@@ -26,12 +27,16 @@ const ProductDetails = ({ product }) => {
       alert('Please select a size before adding to cart.');
       return;
     }
-    addToCart({ ...product, size: selectedSize });
+    if (!selectedColor) {
+      alert('Please select a color before adding to cart.');
+      return;
+    }
+    addToCart({ ...product, size: selectedSize, color: selectedColor });
     openCart();
   };
 
   const handleBuyNow = () => {
-    navigate('/checkout', { state: { product, selectedSize } });
+    navigate('/checkout', { state: { product, selectedSize, selectedColor } });
   };
 
   const handlePrevImage = () => {
@@ -47,7 +52,7 @@ const ProductDetails = ({ product }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 font-circular">
       <div className="flex flex-col lg:flex-row gap-12 items-start lg:items-center">
         
         {/* --- Product Image Gallery (Left) --- */}
@@ -112,24 +117,53 @@ const ProductDetails = ({ product }) => {
 
         {/* --- Product Details (Right) --- */}
         <div className="lg:w-1/2 space-y-6">
-          <h1 className="text-4xl font-bold">{product.name}</h1>
-          <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+          <h1 className="text-4xl font-bold font-circular">{product.name}</h1>
+          
+          {/* Company Name */}
+          <p className="text-lg font-circular text-gray-600 dark:text-gray-400">
+            by {product.company}
+          </p>
+          
+          <p className="text-2xl font-semibold font-circular text-gray-800 dark:text-gray-200">
             ${(product.price / 100).toFixed(2)}
           </p>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-circular">
             {product.description}
           </p>
           
+          {/* Colors Section */}
+          <div>
+            <h3 className="font-semibold mb-2 font-circular">Available Colors</h3>
+            <div className="flex gap-2">
+              {product.colors.map(color => (
+                <button
+                  key={color}
+                  onClick={() => setSelectedColor(color)}
+                  className={`
+                    px-4 py-2 rounded-full border-2 font-circular text-sm
+                    ${selectedColor === color
+                      ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+                      : 'bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
+                    }
+                    transition-colors duration-200
+                  `}
+                >
+                  {color}
+                </button>
+              ))}
+            </div>
+          </div>
+          
           {/* Sizes Section */}
           <div>
-            <h3 className="font-semibold mb-2">Available Sizes</h3>
+            <h3 className="font-semibold mb-2 font-circular">Available Sizes</h3>
             <div className="flex gap-2">
               {product.sizes.map(size => (
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
                   className={`
-                    w-12 h-12 rounded-full border-2 
+                    w-12 h-12 rounded-full border-2 font-circular
                     ${selectedSize === size
                       ? 'bg-blue-600 border-blue-600 text-white shadow-md'
                       : 'bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
@@ -147,17 +181,45 @@ const ProductDetails = ({ product }) => {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={handleAddToCart}
-              className="w-full sm:w-auto px-8 py-4 text-lg bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-200"
+              className="w-full sm:w-auto px-8 py-4 text-lg bg-black text-white rounded-xl font-semibold font-circular hover:bg-gray-800 transition-colors duration-200"
             >
               Add to Cart
             </button>
             <button
               onClick={handleBuyNow}
-              className="w-full sm:w-auto px-8 py-4 text-lg bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors duration-200"
+              className="w-full sm:w-auto px-8 py-4 text-lg bg-blue-600 text-white rounded-xl font-semibold font-circular hover:bg-blue-700 transition-colors duration-200"
             >
               Buy Now
             </button>
           </div>
+        </div>
+      </div>
+      
+      {/* Reviews Section */}
+      <div className="mt-16">
+        <h2 className="text-3xl font-bold font-circular mb-8">Customer Reviews</h2>
+        <div className="space-y-6">
+          {product.reviews.map(review => (
+            <div key={review.id} className="border-b border-gray-200 dark:border-gray-700 pb-6">
+              <div className="flex items-center gap-2 mb-2">
+                <h4 className="font-semibold font-circular">{review.customerName}</h4>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-4 h-4 ${
+                        i < review.rating
+                          ? 'text-yellow-400 fill-current'
+                          : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-gray-500 font-circular">{review.date}</span>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 font-circular">{review.comment}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
