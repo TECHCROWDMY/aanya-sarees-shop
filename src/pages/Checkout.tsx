@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { ShoppingCart, Truck, CreditCard, XCircle } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ShoppingCart, Truck, CreditCard, XCircle, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +15,7 @@ const dummyProduct = {
 
 function CheckoutPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const initialProduct = location.state?.product || dummyProduct;
 
   const [step, setStep] = useState(1);
@@ -74,7 +75,7 @@ function CheckoutPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Steps Indicator */}
-            <div className="max-w-xl mx-auto flex justify-center items-center relative after:absolute after:top-1/2 after:left-0 after:right-0 after:-translate-y-1/2 after:h-0.5 after:bg-border after:z-0 px-4 sm:px-0 gap-8">
+            <div className="max-w-xl mx-auto flex justify-center items-center relative px-4 sm:px-0 gap-8">
               {steps.map((s) => {
                 const isActive = step >= s.id;
                 const isCompleted = step > s.id;
@@ -94,6 +95,15 @@ function CheckoutPage() {
             {/* Step Content Containers */}
             {step === 1 && (
               <div className="bg-card p-8 rounded-2xl shadow-lg border">
+                <Button 
+                  onClick={() => navigate('/products')} 
+                  variant="outline" 
+                  size="lg" 
+                  className="font-circular mb-6"
+                >
+                  <ArrowLeft className="mr-2" size={20} />
+                  Continue Shopping
+                </Button>
                 <h2 className="text-2xl font-semibold mb-6 text-foreground">Order Details</h2>
                 <div className="flex items-center space-x-6 border-b border-border pb-6 mb-6">
                   <img src={initialProduct.image} alt={initialProduct.name} className="w-24 h-24 object-cover rounded-xl" />
@@ -111,6 +121,10 @@ function CheckoutPage() {
 
             {step === 2 && (
               <div className="bg-card p-8 rounded-2xl shadow-lg border">
+                <Button onClick={prevStep} variant="outline" size="lg" className="font-circular mb-6">
+                  <ArrowLeft className="mr-2" size={20} />
+                  Back
+                </Button>
                 <h2 className="text-2xl font-semibold mb-6 text-foreground">Shipping Information</h2>
                 <form className="space-y-6">
                   <Input type="text" placeholder="Full Name" value={shippingDetails.name} onChange={(e) => setShippingDetails({ ...shippingDetails, name: e.target.value })} className="w-full font-circular" />
@@ -125,6 +139,10 @@ function CheckoutPage() {
 
             {step === 3 && (
               <div className="bg-card p-8 rounded-2xl shadow-lg border">
+                <Button onClick={prevStep} variant="outline" size="lg" className="font-circular mb-6">
+                  <ArrowLeft className="mr-2" size={20} />
+                  Back
+                </Button>
                 <h2 className="text-2xl font-semibold mb-6 text-foreground">Payment Details</h2>
                 <form className="space-y-6">
                   <Input type="text" placeholder="Card Number" value={paymentDetails.cardNumber} onChange={(e) => setPaymentDetails({ ...paymentDetails, cardNumber: e.target.value })} className="w-full font-circular" />
@@ -135,15 +153,6 @@ function CheckoutPage() {
                 </form>
               </div>
             )}
-            
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8">
-              {step > 1 && (
-                <Button onClick={prevStep} variant="outline" size="lg" className="font-circular">
-                  Back
-                </Button>
-              )}
-            </div>
           </div>
 
           {/* Sidebar - Order Summary */}
