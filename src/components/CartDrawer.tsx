@@ -1,8 +1,16 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/cartContext';
+import { Button } from '@/components/ui/button';
 
 const CartDrawer = () => {
   const { isCartOpen, closeCart, cartItems } = useCart();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    closeCart();
+    navigate('/checkout');
+  };
 
   // Prevent background scroll when cart is open
   useEffect(() => {
@@ -38,7 +46,7 @@ const CartDrawer = () => {
           ✕
         </button>
       </div>
-      <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-60px)]">
+      <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-140px)]">
         {cartItems.length === 0 ? (
           <p className="font-circular text-gray-500">Your cart is empty.</p>
         ) : (
@@ -47,11 +55,23 @@ const CartDrawer = () => {
               key={index}
               className="flex justify-between items-center border-b pb-2"
             >
-              <span>{item.name}</span>
-              <span className="font-semibold">₹{item.price}</span>
+              <span className="font-circular">{item.name}</span>
+              <span className="font-circular font-semibold">₹{item.price}</span>
             </div>
           ))
         )}
+      </div>
+      
+      {/* Footer with Checkout Button */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-white">
+        <Button
+          onClick={handleCheckout}
+          disabled={cartItems.length === 0}
+          className="w-full font-circular"
+          variant="luxury"
+        >
+          Proceed To Checkout
+        </Button>
       </div>
     </div>
   </>
