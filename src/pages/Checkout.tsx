@@ -94,17 +94,16 @@ function CheckoutPage() {
 
             {/* Step Content Containers */}
             {step === 1 && (
-              <div className="bg-card p-8 rounded-2xl shadow-lg border">
-                <Button 
+              <>
+                <button 
                   onClick={() => navigate('/products')} 
-                  variant="outline" 
-                  size="lg" 
-                  className="font-circular mb-6"
+                  className="flex items-center text-primary hover:underline font-circular mb-4 transition-colors"
                 >
-                  <ArrowLeft className="mr-2" size={20} />
+                  <ArrowLeft className="mr-2" size={18} />
                   Continue Shopping
-                </Button>
-                <h2 className="text-2xl font-semibold mb-6 text-foreground">Order Details</h2>
+                </button>
+                <div className="bg-card p-8 rounded-2xl shadow-lg border">
+                  <h2 className="text-2xl font-semibold mb-6 text-foreground">Order Details</h2>
                 <div className="flex items-center space-x-6 border-b border-border pb-6 mb-6">
                   <img src={initialProduct.image} alt={initialProduct.name} className="w-24 h-24 object-cover rounded-xl" />
                   <div className="flex-1">
@@ -117,15 +116,20 @@ function CheckoutPage() {
                   <span className="text-muted-foreground">Total:</span> <span className="text-foreground">${initialProduct.price}</span>
                 </div>
               </div>
+              </>
             )}
 
             {step === 2 && (
-              <div className="bg-card p-8 rounded-2xl shadow-lg border">
-                <Button onClick={prevStep} variant="outline" size="lg" className="font-circular mb-6">
-                  <ArrowLeft className="mr-2" size={20} />
+              <>
+                <button 
+                  onClick={prevStep} 
+                  className="flex items-center text-primary hover:underline font-circular mb-4 transition-colors"
+                >
+                  <ArrowLeft className="mr-2" size={18} />
                   Back
-                </Button>
-                <h2 className="text-2xl font-semibold mb-6 text-foreground">Shipping Information</h2>
+                </button>
+                <div className="bg-card p-8 rounded-2xl shadow-lg border">
+                  <h2 className="text-2xl font-semibold mb-6 text-foreground">Shipping Information</h2>
                 <form className="space-y-6">
                   <Input type="text" placeholder="Full Name" value={shippingDetails.name} onChange={(e) => setShippingDetails({ ...shippingDetails, name: e.target.value })} className="w-full font-circular" />
                   <Input type="text" placeholder="Street Address" value={shippingDetails.address} onChange={(e) => setShippingDetails({ ...shippingDetails, address: e.target.value })} className="w-full font-circular" />
@@ -135,15 +139,20 @@ function CheckoutPage() {
                   </div>
                 </form>
               </div>
+              </>
             )}
 
             {step === 3 && (
-              <div className="bg-card p-8 rounded-2xl shadow-lg border">
-                <Button onClick={prevStep} variant="outline" size="lg" className="font-circular mb-6">
-                  <ArrowLeft className="mr-2" size={20} />
+              <>
+                <button 
+                  onClick={prevStep} 
+                  className="flex items-center text-primary hover:underline font-circular mb-4 transition-colors"
+                >
+                  <ArrowLeft className="mr-2" size={18} />
                   Back
-                </Button>
-                <h2 className="text-2xl font-semibold mb-6 text-foreground">Payment Details</h2>
+                </button>
+                <div className="bg-card p-8 rounded-2xl shadow-lg border">
+                  <h2 className="text-2xl font-semibold mb-6 text-foreground">Payment Details</h2>
                 <form className="space-y-6">
                   <Input type="text" placeholder="Card Number" value={paymentDetails.cardNumber} onChange={(e) => setPaymentDetails({ ...paymentDetails, cardNumber: e.target.value })} className="w-full font-circular" />
                   <div className="grid grid-cols-2 gap-4">
@@ -152,6 +161,7 @@ function CheckoutPage() {
                   </div>
                 </form>
               </div>
+              </>
             )}
           </div>
 
